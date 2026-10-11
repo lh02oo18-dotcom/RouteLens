@@ -11,7 +11,7 @@
 - [x] RouteLens README、复用边界、贡献和安全文档
 - [x] 建立个人公开 GitHub 仓库
 - [x] 创建基线 Issue 和 Pull Request
-- [ ] 合并并发布 `v0.1.0`
+- [x] 合并并发布 `v0.1.0`
 
 ## v0.2.0：轨迹特征与规则异常
 
