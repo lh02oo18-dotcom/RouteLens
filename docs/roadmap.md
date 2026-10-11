@@ -9,8 +9,8 @@
 - [x] YOLO11n + ByteTrack 冒烟测试和 CSV/JSON/MP4 导出
 - [x] 测试、代码规范和 Streamlit 健康检查
 - [x] RouteLens README、复用边界、贡献和安全文档
-- [ ] 建立个人公开 GitHub 仓库
-- [ ] 创建基线 Issue 和 Pull Request
+- [x] 建立个人公开 GitHub 仓库
+- [x] 创建基线 Issue 和 Pull Request
 - [ ] 合并并发布 `v0.1.0`
 
 ## v0.2.0：轨迹特征与规则异常
