@@ -15,6 +15,8 @@
 - 把自动发现的 `lap` 运行依赖显式写入 requirements。
 - 将 Ultralytics 和 Pytest 的运行目录移到项目内 `.runtime`，规避 Windows 用户目录权限问题。
 - 建立 RouteLens README、复用决策、路线图、评分矩阵和 GitHub 协作配置。
+- 创建公开仓库，并按配置、核心流水线、跟踪器、文档、测试和工具拆分提交。
+- 创建功能 Issue #1 与基线 Pull Request #2，由 GitHub Actions 验证 Python 3.10/3.12。
 
 ### 遇到的问题与解决
 
@@ -31,8 +33,8 @@
 - Streamlit 健康端点返回 HTTP 200。
 - 30 帧 GPU 冒烟测试识别 4 个轨迹 ID，并生成完整输出。
 
-### 未完成
+### 当前阶段
 
-- 未创建个人公开 GitHub 仓库。
-- 未产生真实 GitHub Issue、PR、Actions 和 Release 记录。
-- 未实现 RouteLens 轨迹特征、异常检测和证据卡。
+- 公开仓库、Issue、Pull Request 和 Actions 记录已经建立。
+- `v0.1.0` 将在 PR 检查通过并合并后发布。
+- RouteLens 轨迹特征、异常检测和证据卡已记录在 Issue #1，属于后续迭代。
