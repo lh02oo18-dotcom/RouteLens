@@ -1,0 +1,19 @@
+[project]
+name = "routelens"
+version = "0.1.0"
+description = "Explainable people-trajectory analytics built on YOLO and multi-object tracking."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--basetemp=.runtime/pytest"
+cache_dir = ".runtime/pytest-cache"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
