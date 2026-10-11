@@ -36,5 +36,5 @@
 ### 当前阶段
 
 - 公开仓库、Issue、Pull Request 和 Actions 记录已经建立。
-- `v0.1.0` 将在 PR 检查通过并合并后发布。
+- PR #2 已在 4 项 GitHub Actions 检查全部通过后合并，`v0.1.0` 已发布为 Latest Release。
 - RouteLens 轨迹特征、异常检测和证据卡已记录在 Issue #1，属于后续迭代。
