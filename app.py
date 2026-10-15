@@ -12,7 +12,7 @@ from people_counter.counter import VideoCounter
 
 st.set_page_config(page_title="RouteLens", layout="wide")
 st.title("RouteLens · 可解释人群轨迹分析")
-st.caption("当前为 v0.1 基线：检测、跟踪、计数与轨迹导出已可运行。")
+st.caption("迭代 1：在检测、跟踪与计数基线上，新增轨迹特征和可解释异常规则。")
 
 config = load_config("config/default.yaml")
 
@@ -65,6 +65,47 @@ with st.sidebar:
         ]
     else:
         config.analytics.lines = []
+
+    with st.expander("RouteLens analytics", expanded=True):
+        enable_reverse = st.checkbox(
+            "Enable reverse-direction detection",
+            value=config.analytics.expected_direction is not None,
+            help="Set the expected scene direction. A reverse event requires sustained conflict.",
+        )
+        default_direction = config.analytics.expected_direction or (1.0, 0.0)
+        direction_x = st.number_input("Expected direction X", value=float(default_direction[0]))
+        direction_y = st.number_input("Expected direction Y", value=float(default_direction[1]))
+        config.analytics.expected_direction = (
+            (float(direction_x), float(direction_y)) if enable_reverse else None
+        )
+        config.analytics.reverse_min_duration_sec = st.number_input(
+            "Reverse minimum duration (sec)",
+            min_value=0.1,
+            value=float(config.analytics.reverse_min_duration_sec),
+        )
+        config.analytics.reverse_min_distance_px = st.number_input(
+            "Reverse minimum distance (px)",
+            min_value=0.0,
+            value=float(config.analytics.reverse_min_distance_px),
+        )
+        config.analytics.loitering_enabled = st.checkbox(
+            "Enable loitering detection", value=config.analytics.loitering_enabled
+        )
+        config.analytics.loitering_min_duration_sec = st.number_input(
+            "Loitering minimum duration (sec)",
+            min_value=0.1,
+            value=float(config.analytics.loitering_min_duration_sec),
+        )
+        config.analytics.loitering_max_radius_px = st.number_input(
+            "Loitering maximum radius (px)",
+            min_value=0.0,
+            value=float(config.analytics.loitering_max_radius_px),
+        )
+        config.analytics.loitering_min_path_length_px = st.number_input(
+            "Loitering minimum path length (px)",
+            min_value=0.0,
+            value=float(config.analytics.loitering_min_path_length_px),
+        )
 
     st.header("Runtime")
     config.runtime.frame_skip = st.number_input("Frame skip", 1, 30, config.runtime.frame_skip)
@@ -131,6 +172,19 @@ if start:
             if result.events:
                 st.subheader("Crossing events")
                 st.dataframe(pd.DataFrame(result.events), use_container_width=True)
+
+            if result.trajectory_features:
+                st.subheader("RouteLens trajectory features")
+                st.dataframe(
+                    pd.DataFrame(result.trajectory_features),
+                    use_container_width=True,
+                )
+
+            st.subheader("RouteLens anomaly events")
+            if result.anomaly_events:
+                st.dataframe(pd.DataFrame(result.anomaly_events), use_container_width=True)
+            else:
+                st.info("No trajectory met the configured anomaly thresholds.")
 
             if result.output_paths:
                 st.subheader("Downloads")

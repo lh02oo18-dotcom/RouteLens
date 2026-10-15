@@ -23,12 +23,24 @@ analytics:
   zones: []
   keep_trajectory_points: 300
   overcrowding_threshold:
+  expected_direction:
+  anomaly_min_points: 5
+  reverse_cosine_threshold: -0.5
+  reverse_min_duration_sec: 1.0
+  reverse_min_distance_px: 40.0
+  loitering_enabled: true
+  loitering_min_duration_sec: 10.0
+  loitering_max_radius_px: 50.0
+  loitering_min_path_length_px: 100.0
 
 output:
   directory: outputs
   save_frame_metrics_csv: true
   save_events_csv: true
   save_trajectories_csv: true
+  save_trajectory_features_csv: true
+  save_anomaly_events_csv: true
+  save_anomaly_events_json: true
   save_summary_json: true
   save_annotated_video: false
   annotated_video_name: annotated_output.mp4
