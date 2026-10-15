@@ -10,6 +10,7 @@ detector:
 tracker:
   backend: botsort
 analytics:
+  expected_direction: [1.0, 0.0]
   lines:
     - name: entrance
       start: [1, 2]
@@ -26,3 +27,4 @@ analytics:
     assert config.tracker.backend == "botsort"
     assert config.analytics.lines[0].name == "entrance"
     assert config.analytics.lines[0].start == (1, 2)
+    assert config.analytics.expected_direction == (1.0, 0.0)
