@@ -19,9 +19,9 @@ Input Source
        -> trajectories
        -> dwell summaries
        -> FPS and latency
-  -> RouteLens Mining Layer (planned)
-       -> trajectory features
-       -> rule-based reverse-direction and loitering events
+  -> RouteLens Mining Layer
+       -> trajectory features (implemented)
+       -> rule-based reverse-direction and loitering events (implemented)
        -> DBSCAN route clusters and deviation scores
   -> Evidence Layer (planned)
        -> explainable event schema
@@ -61,6 +61,7 @@ appropriate approach.
 
 The input, detector, tracker, existing analytics, exporter, CLI, and Streamlit
 entry points come from the upstream Crowd Counter foundation. RouteLens-specific
-work starts at the normalized trajectory interface and adds feature extraction,
-route mining, anomaly events, evaluation, and evidence cards. See
+work starts at the normalized trajectory interface. Iteration 1 adds feature
+extraction and rule-based anomaly events; later iterations add route mining,
+evaluation, and evidence cards. See
 `docs/decisions/0001-upstream-reuse.md` for the full decision record.

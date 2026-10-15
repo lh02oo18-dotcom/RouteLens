@@ -4,10 +4,10 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 
 | Area | Current state | Evidence | Next acceptance point |
 |---|---|---|---|
-| Open-source reuse and design | In progress | README, architecture, ADR, NOTICE | Finish the differentiated architecture and interface example |
-| Incremental delivery | In progress | Feature branch, baseline verification, tests, roadmap | Every milestone has an Issue, PR, tests, and runnable result |
-| Repository quality | Local foundation complete | LICENSE, CONTRIBUTING, templates, CI, CHANGELOG | Public CI, PR, Release, and dependency alerts |
-| Communication and problem solving | In progress | Decision records, known issues, progress log | Reproducible demo and documented incident retrospectives |
+| Open-source reuse and design | Iteration 1 complete | README, architecture, ADR, trajectory interface | Add route-clustering interface in iteration 2 |
+| Incremental delivery | In progress | Issues, feature branches, tests, roadmap, progress log | Repeat the same evidence chain for each milestone |
+| Repository quality | Complete for current milestone | LICENSE, CONTRIBUTING, templates, CI, CHANGELOG, Releases | Keep dependency alerts reviewed |
+| Communication and problem solving | In progress | Decision records, known issues, iteration demo | Add evaluated real-video cases |
 
 ## Release readiness
 
@@ -16,9 +16,9 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 | Public repository | Complete | `lh02oo18-dotcom/RouteLens` |
 | README setup path | Verified locally | README and `docs/baseline-verification.md` |
 | Explicit license | Complete | MIT `LICENSE` and `NOTICE.md` |
-| Issue history | Pending | Create real Issues after initial push |
-| At least one Release | Pending | Publish v0.1.0 after the baseline PR passes CI |
-| Traceable history | In progress | Feature branches and Conventional Commits |
+| Issue history | Complete | Issue #1 and linked implementation PRs |
+| At least one Release | Complete | `v0.1.0`; iteration 1 targets `v0.2.0` |
+| Traceable history | Complete for current milestone | Feature branches, Conventional Commits, PRs and Actions |
 
 ## GitHub platform checklist
 
