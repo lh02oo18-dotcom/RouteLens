@@ -92,4 +92,6 @@ class SessionResult:
     frame_metrics: list[dict[str, Any]]
     events: list[dict[str, Any]]
     trajectories: list[dict[str, Any]]
+    trajectory_features: list[dict[str, Any]]
+    anomaly_events: list[dict[str, Any]]
     output_paths: dict[str, str]

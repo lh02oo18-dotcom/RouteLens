@@ -4,6 +4,25 @@ All notable RouteLens changes are recorded here. Upstream history is retained se
 
 ## [Unreleased]
 
+### Planned
+
+- DBSCAN route clustering, deviation scoring, evaluated thresholds, and evidence cards.
+
+## [0.2.0] - 2026-10-15
+
+### Added
+
+- Per-track speed, heading, path, displacement ratio, turn-angle, activity-radius, and data-quality features.
+- Sustained reverse-direction and multi-condition loitering rules with metrics and thresholds.
+- Streamlit controls and tables plus CSV/JSON feature and anomaly exports.
+- Reproducible synthetic trajectory example and deterministic boundary-case tests.
+
+### Verified
+
+- Fourteen unit tests cover baseline analytics, trajectory features, anomaly rules, and exports.
+
+## [0.1.0] - 2026-10-11
+
 ### Added
 
 - RouteLens project identity, quality checklist, roadmap, decision record, security policy, and third-party notice.
@@ -14,11 +33,6 @@ All notable RouteLens changes are recorded here. Upstream history is retained se
 
 - YOLO11n + ByteTrack processed a 30-frame smoke video and exported CSV, JSON, and annotated MP4 artifacts.
 - Eight unit tests, Ruff, dependency consistency, and Streamlit HTTP health check passed locally.
-
-### Planned
-
-- Tag `v0.1.0` only after the public baseline Pull Request is merged and CI passes.
-- Trajectory feature extraction, rule-based anomalies, route clustering, and evidence cards.
 
 ## Upstream 0.2.0
 

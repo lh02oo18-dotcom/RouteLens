@@ -48,6 +48,15 @@ class AnalyticsConfig:
     zones: list[ZoneConfig] = field(default_factory=list)
     keep_trajectory_points: int = 300
     overcrowding_threshold: int | None = None
+    expected_direction: tuple[float, float] | None = None
+    anomaly_min_points: int = 5
+    reverse_cosine_threshold: float = -0.5
+    reverse_min_duration_sec: float = 1.0
+    reverse_min_distance_px: float = 40.0
+    loitering_enabled: bool = True
+    loitering_min_duration_sec: float = 10.0
+    loitering_max_radius_px: float = 50.0
+    loitering_min_path_length_px: float = 100.0
 
 
 @dataclass
@@ -56,6 +65,9 @@ class OutputConfig:
     save_frame_metrics_csv: bool = True
     save_events_csv: bool = True
     save_trajectories_csv: bool = True
+    save_trajectory_features_csv: bool = True
+    save_anomaly_events_csv: bool = True
+    save_anomaly_events_json: bool = True
     save_summary_json: bool = True
     save_annotated_video: bool = False
     annotated_video_name: str = "annotated_output.mp4"
@@ -141,6 +153,8 @@ def _analytics_from_mapping(data: dict[str, Any]) -> AnalyticsConfig:
     lines = [LineConfig(**_line_points(line)) for line in data.get("lines", [])]
     zones = [ZoneConfig(**_zone_points(zone)) for zone in data.get("zones", [])]
     values = {k: v for k, v in data.items() if k not in {"lines", "zones"}}
+    if values.get("expected_direction") is not None:
+        values["expected_direction"] = tuple(values["expected_direction"])
     return AnalyticsConfig(lines=lines, zones=zones, **values)
 
 

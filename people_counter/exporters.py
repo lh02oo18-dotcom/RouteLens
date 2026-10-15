@@ -19,6 +19,8 @@ class SessionExporter:
         frame_metrics: list[dict[str, Any]],
         events: list[dict[str, Any]],
         trajectories: list[dict[str, Any]],
+        trajectory_features: list[dict[str, Any]],
+        anomaly_events: list[dict[str, Any]],
         summary: dict[str, Any],
     ) -> dict[str, str]:
         paths: dict[str, str] = {}
@@ -31,6 +33,18 @@ class SessionExporter:
         if self.config.save_trajectories_csv:
             paths["trajectories_csv"] = str(
                 self._write_csv("trajectories.csv", trajectories)
+            )
+        if self.config.save_trajectory_features_csv:
+            paths["trajectory_features_csv"] = str(
+                self._write_csv("trajectory_features.csv", trajectory_features)
+            )
+        if self.config.save_anomaly_events_csv:
+            paths["anomaly_events_csv"] = str(
+                self._write_csv("anomaly_events.csv", anomaly_events)
+            )
+        if self.config.save_anomaly_events_json:
+            paths["anomaly_events_json"] = str(
+                self._write_json("anomaly_events.json", anomaly_events)
             )
         if self.config.save_summary_json:
             paths["summary_json"] = str(self._write_json("summary.json", summary))
@@ -49,7 +63,7 @@ class SessionExporter:
             writer.writerows(rows)
         return path
 
-    def _write_json(self, filename: str, data: dict[str, Any]) -> Path:
+    def _write_json(self, filename: str, data: Any) -> Path:
         path = self.output_dir / filename
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         return path

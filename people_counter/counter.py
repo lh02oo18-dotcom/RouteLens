@@ -14,6 +14,7 @@ from .exporters import SessionExporter
 from .schema import FrameAnalytics, SessionResult, Track
 from .trackers.csrt import CSRTTracker
 from .trackers.ultralytics_tracker import UltralyticsTracker
+from .trajectory_analysis import analyze_trajectories
 from .visualization import draw_overlay
 
 FrameCallback = Callable[[object, FrameAnalytics, list[Track]], None]
@@ -124,6 +125,17 @@ class VideoCounter:
         summary = self.analytics.summary(processed_frames, elapsed_sec)
         events = [event.to_dict() for event in self.analytics.events]
         trajectories = self.analytics.trajectory_rows()
+        trajectory_features, anomaly_events = analyze_trajectories(
+            trajectories, self.config.analytics
+        )
+        summary["analyzed_trajectories"] = len(trajectory_features)
+        summary["anomaly_events"] = len(anomaly_events)
+        summary["reverse_direction_events"] = sum(
+            event["event_type"] == "reverse_direction" for event in anomaly_events
+        )
+        summary["loitering_events"] = sum(
+            event["event_type"] == "loitering" for event in anomaly_events
+        )
 
         output_paths: dict[str, str] = {}
         if export:
@@ -131,6 +143,8 @@ class VideoCounter:
                 frame_metrics=self.analytics.frame_metrics,
                 events=events,
                 trajectories=trajectories,
+                trajectory_features=trajectory_features,
+                anomaly_events=anomaly_events,
                 summary=summary,
             )
         if video_path is not None:
@@ -141,6 +155,8 @@ class VideoCounter:
             frame_metrics=self.analytics.frame_metrics,
             events=events,
             trajectories=trajectories,
+            trajectory_features=trajectory_features,
+            anomaly_events=anomaly_events,
             output_paths=output_paths,
         )
 

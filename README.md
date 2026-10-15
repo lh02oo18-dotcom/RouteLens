@@ -2,7 +2,7 @@
 
 RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复用开源 Crowd Counter 的 YOLO 人员检测、目标跟踪、越线计数和导出接口，并在此基础上逐步加入轨迹特征、路线聚类、逆行/徘徊/偏离检测及可解释异常证据卡。
 
-> 当前版本：`0.1.0-baseline`。检测、跟踪、计数、轨迹导出和 Streamlit 主路径已经在 Windows + RTX 4060 上跑通；RouteLens 异常挖掘功能仍在后续迭代中。项目不会把上游已有功能标记为本项目创新。
+> 当前版本：`0.2.0`。检测、跟踪、计数和轨迹导出复用开源底座；RouteLens 已新增轨迹特征、持续逆行和徘徊规则、可解释指标与结果导出。项目不会把上游已有功能标记为本项目创新。
 
 ## 功能状态
 
@@ -12,9 +12,9 @@ RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复�
 | ByteTrack、BoT-SORT、CSRT 跟踪 | 已跑通 | 复用上游接口 |
 | 越线、占用、停留和轨迹导出 | 已跑通 | 复用上游接口 |
 | Streamlit 与 CLI | 已跑通 | 复用并重新组织 |
-| 轨迹速度、方向、曲率、区域序列特征 | 待实现 | RouteLens 迭代 1 |
+| 轨迹速度、方向、转向角、路径和活动半径 | 已实现 | RouteLens 迭代 1 |
 | DBSCAN 主路线聚类与偏离检测 | 待实现 | RouteLens 迭代 2 |
-| 逆行、徘徊、拥挤事件 | 待实现 | RouteLens 迭代 2 |
+| 持续逆行与徘徊事件 | 已实现 | RouteLens 迭代 1 |
 | 异常证据卡与结果解释 | 待实现 | RouteLens 迭代 3 |
 
 ## 设计亮点与差异化
@@ -75,6 +75,8 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 - `frame_metrics.csv`：逐帧人数、占用、FPS 和延迟
 - `crossing_events.csv`：越线事件
 - `trajectories.csv`：轨迹点、时间、边界框和置信度
+- `trajectory_features.csv`：速度、方向、路径长度、位移比、转向角和活动半径
+- `anomaly_events.csv` / `anomaly_events.json`：异常类型、轨迹 ID、时间段、指标、阈值和证据引用
 - `summary.json`：会话汇总
 - `annotated_output.mp4`：可选标注视频
 
@@ -90,7 +92,7 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 - `people_counter/counter.py`：主处理流水线
 - `app.py`、`CLI.py`：交互与可复现实验入口
 
-扩展时优先增加数据结构、纯计算模块和单元测试，再接入主流水线，避免算法与界面耦合。
+轨迹分析参数、边界处理、可复现示例和局限见 `docs/iteration-1.md`。扩展时优先增加数据结构、纯计算模块和单元测试，再接入主流水线，避免算法与界面耦合。
 
 ## 测试与质量检查
 
@@ -101,12 +103,12 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。当前本机结果为 8 项测试通过。
+GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。迭代 1 本机结果为 14 项测试通过。
 
 ## 迭代和版本
 
 - `v0.1.0`：本机可运行基线、文档与仓库规范
-- `v0.2.0`：轨迹特征、逆行和徘徊检测
+- `v0.2.0`：轨迹特征、持续逆行、徘徊检测和异常列表
 - `v0.3.0`：DBSCAN 路线聚类、偏离检测和实验评估
 - `v1.0.0`：证据卡、完整演示数据和稳定 Release
 
@@ -124,4 +126,4 @@ GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pyt
 
 - 密集遮挡、低照度、抖动镜头会降低检测和跟踪稳定性。
 - 冒烟测试使用重复静态图像，只验证主路径，不代表真实性能或异常检测精度。
-- 暂未建立真实视频标注集，异常算法完成后必须报告样本、阈值和误报/漏报。
+- 暂未建立真实视频标注集；当前异常结果是场景阈值规则，不代表已经验证的模型精度。
