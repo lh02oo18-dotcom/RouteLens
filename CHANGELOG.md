@@ -6,7 +6,23 @@ All notable RouteLens changes are recorded here. Upstream history is retained se
 
 ### Planned
 
-- DBSCAN route clustering, deviation scoring, evaluated thresholds, and evidence cards.
+- Real-video labeled evaluation and visual evidence cards.
+
+## [0.3.0] - 2026-10-18
+
+### Added
+
+- Distance-based trajectory resampling and shared scene normalization.
+- Deterministic DBSCAN route clustering, route prototypes, and explainable deviation scores.
+- Route assignments, prototypes, and mining-summary CSV/JSON exports plus Streamlit controls.
+- Event-level precision/recall/F1 evaluation and a clearly labeled synthetic parameter sweep.
+
+### Safety and verification
+
+- Sessions without a supported route cluster never emit route-deviation events.
+- Static and undersized tracks are excluded and counted in the route summary.
+- Twenty-one unit tests, Ruff, dependency checks, and the synthetic sweep pass locally.
+- Synthetic results verify the pipeline only; real-world accuracy remains unevaluated.
 
 ## [0.2.0] - 2026-10-15
 
