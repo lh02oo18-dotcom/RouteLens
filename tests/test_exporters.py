@@ -12,6 +12,9 @@ def test_exporter_writes_route_lens_feature_and_event_artifacts(tmp_path):
         events=[],
         trajectories=[],
         trajectory_features=[{"track_id": 1, "duration_sec": 2.0}],
+        route_assignments=[{"track_id": 1, "cluster_id": 0}],
+        route_prototypes=[{"cluster_id": 0, "point_index": 0}],
+        route_summary={"status": "ready", "cluster_count": 1},
         anomaly_events=[{"event_type": "reverse_direction", "track_id": 1}],
         summary={"anomaly_events": 1},
     )
@@ -24,3 +27,9 @@ def test_exporter_writes_route_lens_feature_and_event_artifacts(tmp_path):
         {"event_type": "reverse_direction", "track_id": 1}
     ]
     assert paths["anomaly_events_json"].endswith("anomaly_events.json")
+    assert "cluster_id" in (tmp_path / "route_assignments.csv").read_text(
+        encoding="utf-8"
+    )
+    assert json.loads((tmp_path / "route_summary.json").read_text(encoding="utf-8"))[
+        "status"
+    ] == "ready"
