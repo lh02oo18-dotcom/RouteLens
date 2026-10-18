@@ -57,6 +57,12 @@ class AnalyticsConfig:
     loitering_min_duration_sec: float = 10.0
     loitering_max_radius_px: float = 50.0
     loitering_min_path_length_px: float = 100.0
+    route_mining_enabled: bool = True
+    route_min_points: int = 5
+    route_resample_points: int = 16
+    route_dbscan_eps: float = 0.08
+    route_dbscan_min_samples: int = 3
+    route_deviation_threshold: float = 0.12
 
 
 @dataclass
@@ -68,6 +74,9 @@ class OutputConfig:
     save_trajectory_features_csv: bool = True
     save_anomaly_events_csv: bool = True
     save_anomaly_events_json: bool = True
+    save_route_assignments_csv: bool = True
+    save_route_prototypes_csv: bool = True
+    save_route_summary_json: bool = True
     save_summary_json: bool = True
     save_annotated_video: bool = False
     annotated_video_name: str = "annotated_output.mp4"

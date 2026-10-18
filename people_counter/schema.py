@@ -93,5 +93,8 @@ class SessionResult:
     events: list[dict[str, Any]]
     trajectories: list[dict[str, Any]]
     trajectory_features: list[dict[str, Any]]
+    route_assignments: list[dict[str, Any]]
+    route_prototypes: list[dict[str, Any]]
+    route_summary: dict[str, Any]
     anomaly_events: list[dict[str, Any]]
     output_paths: dict[str, str]
