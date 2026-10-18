@@ -19,7 +19,7 @@ Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 
 1. Start Streamlit.
 2. Upload a fixed short video.
 3. Show detections, trajectories, and baseline metrics.
-4. Open the anomaly list and an evidence card after those features land.
+4. Show the route cluster assignments, deviation score, and anomaly list.
 5. Download CSV/JSON and explain how results can be audited.
 
 ### 3:50–4:30 Evaluation and limits

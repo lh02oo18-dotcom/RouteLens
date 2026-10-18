@@ -4,7 +4,7 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 
 | Area | Current state | Evidence | Next acceptance point |
 |---|---|---|---|
-| Open-source reuse and design | Iteration 1 complete | README, architecture, ADR, trajectory interface | Add route-clustering interface in iteration 2 |
+| Open-source reuse and design | Iteration 2 complete | README, architecture, ADR, trajectory and route-mining interfaces | Add visual evidence cards in iteration 3 |
 | Incremental delivery | In progress | Issues, feature branches, tests, roadmap, progress log | Repeat the same evidence chain for each milestone |
 | Repository quality | Complete for current milestone | LICENSE, CONTRIBUTING, templates, CI, CHANGELOG, Releases | Keep dependency alerts reviewed |
 | Communication and problem solving | In progress | Decision records, known issues, iteration demo | Add evaluated real-video cases |
@@ -17,7 +17,7 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 | README setup path | Verified locally | README and `docs/baseline-verification.md` |
 | Explicit license | Complete | MIT `LICENSE` and `NOTICE.md` |
 | Issue history | Complete | Issue #1 and linked implementation PRs |
-| At least one Release | Complete | `v0.1.0`; iteration 1 targets `v0.2.0` |
+| At least one Release | Complete | `v0.1.0` and `v0.2.0`; iteration 2 prepares `v0.3.0` |
 | Traceable history | Complete for current milestone | Feature branches, Conventional Commits, PRs and Actions |
 
 ## GitHub platform checklist

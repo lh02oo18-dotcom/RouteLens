@@ -1,6 +1,6 @@
 [project]
 name = "routelens"
-version = "0.2.0"
+version = "0.3.0"
 description = "Explainable people-trajectory analytics built on YOLO and multi-object tracking."
 requires-python = ">=3.10"
 

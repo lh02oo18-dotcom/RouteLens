@@ -20,6 +20,9 @@ class SessionExporter:
         events: list[dict[str, Any]],
         trajectories: list[dict[str, Any]],
         trajectory_features: list[dict[str, Any]],
+        route_assignments: list[dict[str, Any]],
+        route_prototypes: list[dict[str, Any]],
+        route_summary: dict[str, Any],
         anomaly_events: list[dict[str, Any]],
         summary: dict[str, Any],
     ) -> dict[str, str]:
@@ -37,6 +40,18 @@ class SessionExporter:
         if self.config.save_trajectory_features_csv:
             paths["trajectory_features_csv"] = str(
                 self._write_csv("trajectory_features.csv", trajectory_features)
+            )
+        if self.config.save_route_assignments_csv:
+            paths["route_assignments_csv"] = str(
+                self._write_csv("route_assignments.csv", route_assignments)
+            )
+        if self.config.save_route_prototypes_csv:
+            paths["route_prototypes_csv"] = str(
+                self._write_csv("route_prototypes.csv", route_prototypes)
+            )
+        if self.config.save_route_summary_json:
+            paths["route_summary_json"] = str(
+                self._write_json("route_summary.json", route_summary)
             )
         if self.config.save_anomaly_events_csv:
             paths["anomaly_events_csv"] = str(

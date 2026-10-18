@@ -11,6 +11,7 @@ from .analytics import AnalyticsEngine
 from .config_runtime import AppConfig, DetectorConfig, TrackerConfig
 from .detector import Detector
 from .exporters import SessionExporter
+from .route_mining import mine_routes
 from .schema import FrameAnalytics, SessionResult, Track
 from .trackers.csrt import CSRTTracker
 from .trackers.ultralytics_tracker import UltralyticsTracker
@@ -128,6 +129,17 @@ class VideoCounter:
         trajectory_features, anomaly_events = analyze_trajectories(
             trajectories, self.config.analytics
         )
+        route_assignments, route_prototypes, route_summary, route_events = mine_routes(
+            trajectories, self.config.analytics
+        )
+        anomaly_events.extend(route_events)
+        anomaly_events.sort(
+            key=lambda item: (
+                item["start_timestamp_sec"],
+                item["track_id"],
+                item["event_type"],
+            )
+        )
         summary["analyzed_trajectories"] = len(trajectory_features)
         summary["anomaly_events"] = len(anomaly_events)
         summary["reverse_direction_events"] = sum(
@@ -136,6 +148,9 @@ class VideoCounter:
         summary["loitering_events"] = sum(
             event["event_type"] == "loitering" for event in anomaly_events
         )
+        summary["route_clusters"] = route_summary["cluster_count"]
+        summary["route_deviation_events"] = route_summary["deviation_event_count"]
+        summary["route_mining_status"] = route_summary["status"]
 
         output_paths: dict[str, str] = {}
         if export:
@@ -144,6 +159,9 @@ class VideoCounter:
                 events=events,
                 trajectories=trajectories,
                 trajectory_features=trajectory_features,
+                route_assignments=route_assignments,
+                route_prototypes=route_prototypes,
+                route_summary=route_summary,
                 anomaly_events=anomaly_events,
                 summary=summary,
             )
@@ -156,6 +174,9 @@ class VideoCounter:
             events=events,
             trajectories=trajectories,
             trajectory_features=trajectory_features,
+            route_assignments=route_assignments,
+            route_prototypes=route_prototypes,
+            route_summary=route_summary,
             anomaly_events=anomaly_events,
             output_paths=output_paths,
         )

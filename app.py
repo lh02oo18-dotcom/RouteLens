@@ -12,7 +12,7 @@ from people_counter.counter import VideoCounter
 
 st.set_page_config(page_title="RouteLens", layout="wide")
 st.title("RouteLens · 可解释人群轨迹分析")
-st.caption("迭代 1：在检测、跟踪与计数基线上，新增轨迹特征和可解释异常规则。")
+st.caption("迭代 2：从轨迹中挖掘主要通行模式，并给出可解释的路线偏离分数。")
 
 config = load_config("config/default.yaml")
 
@@ -106,6 +106,30 @@ with st.sidebar:
             min_value=0.0,
             value=float(config.analytics.loitering_min_path_length_px),
         )
+        config.analytics.route_mining_enabled = st.checkbox(
+            "Enable route clustering", value=config.analytics.route_mining_enabled
+        )
+        config.analytics.route_dbscan_eps = st.number_input(
+            "Route similarity radius",
+            min_value=0.001,
+            max_value=2.0,
+            value=float(config.analytics.route_dbscan_eps),
+            step=0.01,
+            help="DBSCAN radius after scene-level normalization; smaller values form tighter routes.",
+        )
+        config.analytics.route_dbscan_min_samples = st.number_input(
+            "Minimum tracks per route",
+            min_value=2,
+            max_value=100,
+            value=int(config.analytics.route_dbscan_min_samples),
+        )
+        config.analytics.route_deviation_threshold = st.number_input(
+            "Deviation score threshold",
+            min_value=0.001,
+            max_value=2.0,
+            value=float(config.analytics.route_deviation_threshold),
+            step=0.01,
+        )
 
     st.header("Runtime")
     config.runtime.frame_skip = st.number_input("Frame skip", 1, 30, config.runtime.frame_skip)
@@ -179,6 +203,16 @@ if start:
                     pd.DataFrame(result.trajectory_features),
                     use_container_width=True,
                 )
+
+            st.subheader("RouteLens route mining")
+            st.json(result.route_summary)
+            if result.route_assignments:
+                st.dataframe(
+                    pd.DataFrame(result.route_assignments),
+                    use_container_width=True,
+                )
+            else:
+                st.info("No supported route cluster was available for this session.")
 
             st.subheader("RouteLens anomaly events")
             if result.anomaly_events:
