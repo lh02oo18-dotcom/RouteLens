@@ -24,9 +24,9 @@ Input Source
        -> rule-based reverse-direction and loitering events (implemented)
        -> distance resampling and shared scene normalization (implemented)
        -> DBSCAN route clusters, prototypes, and deviation scores (implemented)
-  -> Evidence Layer (planned)
+  -> Evidence Layer (implemented)
        -> explainable event schema
-       -> key frames and trajectory overlays
+       -> key frames, trajectory overlays, metrics, thresholds and fallback status
   -> Interfaces
        -> Streamlit
        -> CLI
@@ -64,5 +64,6 @@ The input, detector, tracker, existing analytics, exporter, CLI, and Streamlit
 entry points come from the upstream Crowd Counter foundation. RouteLens-specific
 work starts at the normalized trajectory interface. Iteration 1 adds feature
 extraction and rule-based anomaly events; iteration 2 adds route mining and an
-event-evaluation interface; a later iteration adds evidence cards. See
+event-evaluation interface; iteration 3 adds evidence cards and stable presentation
+artifacts. See
 `docs/decisions/0001-upstream-reuse.md` for the full decision record.

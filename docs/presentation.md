@@ -12,7 +12,7 @@ Use the ADR interface table to show the reused YOLO, ByteTrack, video loop, and 
 
 ### 1:20–2:20 Incremental delivery
 
-Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 baseline, then explain how v0.2 and v0.3 introduce rule-based anomalies and data mining. Use the progress log for one real problem-resolution example.
+Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 baseline, then explain how v0.2, v0.3, and v1.0.0 introduce rule-based anomalies, data mining, and evidence cards. Use the progress log for one real problem-resolution example.
 
 ### 2:20–3:50 Live demo
 
@@ -20,7 +20,8 @@ Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 
 2. Upload a fixed short video.
 3. Show detections, trajectories, and baseline metrics.
 4. Show the route cluster assignments, deviation score, and anomaly list.
-5. Download CSV/JSON and explain how results can be audited.
+5. Open one evidence card and point to the keyframe, trajectory, metric and threshold.
+6. Download CSV/JSON and explain how results can be audited.
 
 ### 3:50–4:30 Evaluation and limits
 

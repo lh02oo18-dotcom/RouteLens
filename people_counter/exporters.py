@@ -24,6 +24,8 @@ class SessionExporter:
         route_prototypes: list[dict[str, Any]],
         route_summary: dict[str, Any],
         anomaly_events: list[dict[str, Any]],
+        evidence_cards: list[dict[str, Any]],
+        evidence_summary: dict[str, Any],
         summary: dict[str, Any],
     ) -> dict[str, str]:
         paths: dict[str, str] = {}
@@ -60,6 +62,17 @@ class SessionExporter:
         if self.config.save_anomaly_events_json:
             paths["anomaly_events_json"] = str(
                 self._write_json("anomaly_events.json", anomaly_events)
+            )
+        if self.config.save_evidence_cards_csv:
+            paths["evidence_cards_csv"] = str(
+                self._write_csv("evidence_cards.csv", evidence_cards)
+            )
+        if self.config.save_evidence_manifest_json:
+            paths["evidence_manifest_json"] = str(
+                self._write_json(
+                    "evidence_manifest.json",
+                    {"summary": evidence_summary, "cards": evidence_cards},
+                )
             )
         if self.config.save_summary_json:
             paths["summary_json"] = str(self._write_json("summary.json", summary))

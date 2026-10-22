@@ -1,14 +1,13 @@
 [project]
 name = "routelens"
-version = "0.3.0"
+version = "1.0.0"
 description = "Explainable people-trajectory analytics built on YOLO and multi-object tracking."
 requires-python = ">=3.10"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
-addopts = "--basetemp=.runtime/pytest"
-cache_dir = ".runtime/pytest-cache"
+addopts = "-p no:cacheprovider --basetemp=outputs/pytest-v1"
 
 [tool.ruff]
 line-length = 100

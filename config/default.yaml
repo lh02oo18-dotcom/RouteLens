@@ -50,6 +50,10 @@ output:
   save_route_assignments_csv: true
   save_route_prototypes_csv: true
   save_route_summary_json: true
+  save_evidence_cards: true
+  save_evidence_cards_csv: true
+  save_evidence_manifest_json: true
+  evidence_max_cards: 100
   save_summary_json: true
   save_annotated_video: false
   annotated_video_name: annotated_output.mp4

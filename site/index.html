@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RouteLens · 可解释人群轨迹分析</title>
+  <style>
+    :root { color-scheme: light; --ink:#151515; --muted:#606060; --line:#d5d5d5; --paper:#f7f7f5; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:Arial,"Microsoft YaHei",sans-serif; color:var(--ink); background:var(--paper); }
+    main { max-width:1040px; margin:auto; padding:64px 28px 80px; }
+    .eyebrow { letter-spacing:.16em; font-weight:700; font-size:.78rem; }
+    h1 { font-size:clamp(2.4rem,7vw,5.2rem); line-height:1.02; margin:.35em 0 .25em; }
+    .lead { max-width:760px; font-size:1.2rem; line-height:1.7; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:42px 0; }
+    .card { background:white; border:1px solid var(--line); border-radius:16px; padding:22px; }
+    .card strong { display:block; font-size:1.55rem; margin-bottom:8px; }
+    .flow { background:#171717; color:white; padding:26px; border-radius:16px; line-height:2; overflow:auto; }
+    h2 { margin-top:54px; font-size:1.75rem; }
+    ul { line-height:1.9; padding-left:1.2rem; }
+    a { color:inherit; font-weight:700; }
+    .boundary { border-left:5px solid #171717; padding:4px 0 4px 20px; color:var(--muted); }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">ROUTELENS · VERSION 1.0.0</div>
+  <h1>看见路线，也看见判定依据。</h1>
+  <p class="lead">RouteLens 复用 YOLO 与多目标跟踪，把视频中的轨迹转化为路线模式、异常事件和可复查证据卡。它面向普通个人电脑运行，输出 CSV、JSON、视频和图像证据。</p>
+  <div class="grid">
+    <div class="card"><strong>视觉感知</strong>人员检测、目标跟踪、计数与轨迹记录</div>
+    <div class="card"><strong>数据挖掘</strong>DBSCAN 主路线聚类、路线原型与偏离评分</div>
+    <div class="card"><strong>可解释输出</strong>关键帧、轨迹、指标、阈值与证据引用</div>
+  </div>
+  <h2>主路径</h2>
+  <div class="flow">视频输入 → 人员检测 → 多目标跟踪 → 轨迹特征 → 路线聚类 → 逆行 / 徘徊 / 偏离 → 证据卡与结构化导出</div>
+  <h2>可复现检查</h2>
+  <ul>
+    <li><code>python -m pytest -q</code>：运行全部单元测试</li>
+    <li><code>python -m tools.route_mining_demo</code>：运行合成路线参数扫描</li>
+    <li><code>python -m tools.evidence_demo</code>：生成证据卡回退演示</li>
+    <li><code>python -m streamlit run app.py</code>：启动本地交互界面</li>
+  </ul>
+  <p class="boundary">合成实验只验证计算与导出链路。真实视频的 Precision、Recall 和 F1 必须使用许可明确的视频、独立人工标注及冻结参数后报告。</p>
+  <p><a href="https://github.com/lh02oo18-dotcom/RouteLens">查看 GitHub 仓库与运行说明 →</a></p>
+</main>
+</body>
+</html>
