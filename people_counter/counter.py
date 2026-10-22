@@ -10,6 +10,7 @@ import cv2
 from .analytics import AnalyticsEngine
 from .config_runtime import AppConfig, DetectorConfig, TrackerConfig
 from .detector import Detector
+from .evidence import generate_evidence_cards
 from .exporters import SessionExporter
 from .route_mining import mine_routes
 from .schema import FrameAnalytics, SessionResult, Track
@@ -152,6 +153,24 @@ class VideoCounter:
         summary["route_deviation_events"] = route_summary["deviation_event_count"]
         summary["route_mining_status"] = route_summary["status"]
 
+        evidence_cards: list[dict] = []
+        evidence_summary = {
+            "status": "disabled",
+            "card_count": 0,
+            "requested_event_count": len(anomaly_events),
+        }
+        if export and self.config.output.save_evidence_cards:
+            evidence_cards, evidence_summary = generate_evidence_cards(
+                self.source,
+                anomaly_events,
+                trajectories,
+                self.config.output.directory,
+                privacy_blur=self.config.runtime.privacy_blur,
+                max_cards=self.config.output.evidence_max_cards,
+            )
+        summary["evidence_cards"] = len(evidence_cards)
+        summary["evidence_status"] = evidence_summary["status"]
+
         output_paths: dict[str, str] = {}
         if export:
             output_paths = SessionExporter(self.config.output).export(
@@ -163,6 +182,8 @@ class VideoCounter:
                 route_prototypes=route_prototypes,
                 route_summary=route_summary,
                 anomaly_events=anomaly_events,
+                evidence_cards=evidence_cards,
+                evidence_summary=evidence_summary,
                 summary=summary,
             )
         if video_path is not None:
@@ -178,6 +199,8 @@ class VideoCounter:
             route_prototypes=route_prototypes,
             route_summary=route_summary,
             anomaly_events=anomaly_events,
+            evidence_cards=evidence_cards,
+            evidence_summary=evidence_summary,
             output_paths=output_paths,
         )
 

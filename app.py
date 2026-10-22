@@ -12,7 +12,7 @@ from people_counter.counter import VideoCounter
 
 st.set_page_config(page_title="RouteLens", layout="wide")
 st.title("RouteLens · 可解释人群轨迹分析")
-st.caption("迭代 2：从轨迹中挖掘主要通行模式，并给出可解释的路线偏离分数。")
+st.caption("v1.0.0：从轨迹中发现通行模式，并用关键帧、轨迹和指标生成异常证据卡。")
 
 config = load_config("config/default.yaml")
 
@@ -137,6 +137,11 @@ with st.sidebar:
     config.runtime.max_frames = int(max_frames) or None
     config.runtime.privacy_blur = st.checkbox("Privacy blur", value=config.runtime.privacy_blur)
     config.output.save_annotated_video = st.checkbox("Save annotated MP4", value=False)
+    config.output.save_evidence_cards = st.checkbox(
+        "Generate anomaly evidence cards",
+        value=config.output.save_evidence_cards,
+        help="Each card records a keyframe, trajectory, reason, metric and threshold.",
+    )
 
     start = st.button("Run analysis", type="primary")
 
@@ -219,6 +224,21 @@ if start:
                 st.dataframe(pd.DataFrame(result.anomaly_events), use_container_width=True)
             else:
                 st.info("No trajectory met the configured anomaly thresholds.")
+
+            st.subheader("RouteLens evidence cards")
+            st.json(result.evidence_summary)
+            if result.evidence_cards:
+                for card in result.evidence_cards:
+                    image_path = Path(config.output.directory) / card["image_path"]
+                    with st.expander(
+                        f"{card['card_id']} · {card['event_type']} · Track {card['track_id']}",
+                        expanded=True,
+                    ):
+                        if image_path.exists():
+                            st.image(str(image_path), use_container_width=True)
+                        st.json(card)
+            else:
+                st.info("No anomaly event was available for an evidence card.")
 
             if result.output_paths:
                 st.subheader("Downloads")

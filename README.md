@@ -2,7 +2,7 @@
 
 RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复用开源 Crowd Counter 的 YOLO 人员检测、目标跟踪、越线计数和导出接口，并在此基础上逐步加入轨迹特征、路线聚类、逆行/徘徊/偏离检测及可解释异常证据卡。
 
-> 当前版本：`0.3.0`。检测、跟踪、计数和轨迹导出复用开源底座；RouteLens 已新增轨迹特征、持续逆行与徘徊规则、DBSCAN 主路线聚类、偏离评分和可复现评价入口。项目不会把上游已有功能标记为本项目创新。
+> 当前版本：`1.0.0`。检测、跟踪、计数和轨迹导出复用开源底座；RouteLens 已新增轨迹特征、持续逆行与徘徊规则、DBSCAN 主路线聚类、偏离评分、异常证据卡和可复现评价入口。项目不会把上游已有功能标记为本项目创新。
 
 ## 功能状态
 
@@ -15,11 +15,11 @@ RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复�
 | 轨迹速度、方向、转向角、路径和活动半径 | 已实现 | RouteLens 迭代 1 |
 | DBSCAN 主路线聚类与偏离检测 | 已实现 | RouteLens 迭代 2 |
 | 持续逆行与徘徊事件 | 已实现 | RouteLens 迭代 1 |
-| 异常证据卡与结果解释 | 待实现 | RouteLens 迭代 3 |
+| 异常证据卡与结果解释 | 已实现 | RouteLens 迭代 3 |
 
 ## 设计亮点与差异化
 
-上游项目回答“画面里有多少人、是否越线”；RouteLens 进一步回答“人沿什么路线移动、行为为什么被判为异常、证据在哪里”。计划采用分层结构：
+上游项目回答“画面里有多少人、是否越线”；RouteLens 进一步回答“人沿什么路线移动、行为为什么被判为异常、证据在哪里”。当前采用分层结构：
 
 ```text
 视频/摄像头
@@ -80,6 +80,8 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 - `route_prototypes.csv`：每个主路线簇的重采样原型点
 - `route_summary.json`：聚类状态、参数、样本计数和安全规则
 - `anomaly_events.csv` / `anomaly_events.json`：异常类型、轨迹 ID、时间段、指标、阈值和证据引用
+- `evidence_cards/`：异常关键帧、目标框、轨迹和判定摘要 JPG
+- `evidence_cards.csv` / `evidence_manifest.json`：证据卡索引、帧来源、指标和阈值
 - `summary.json`：会话汇总
 - `annotated_output.mp4`：可选标注视频
 
@@ -93,12 +95,13 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 - `people_counter/trajectory_analysis.py`：轨迹特征和规则异常
 - `people_counter/route_mining.py`：重采样、DBSCAN、路线原型和偏离评分
 - `people_counter/evaluation.py`：事件级匹配及精确率、召回率和 F1
+- `people_counter/evidence.py`：关键帧读取、轨迹叠加、证据卡与回退画布
 - `people_counter/schema.py`：跨模块数据结构
 - `people_counter/exporters.py`：结果导出
 - `people_counter/counter.py`：主处理流水线
 - `app.py`、`CLI.py`：交互与可复现实验入口
 
-轨迹规则见 `docs/iteration-1.md`，路线挖掘参数、实验入口和风险边界见 `docs/iteration-2.md`。扩展时优先增加数据结构、纯计算模块和单元测试，再接入主流水线，避免算法与界面耦合。
+轨迹规则见 `docs/iteration-1.md`，路线挖掘参数与风险边界见 `docs/iteration-2.md`，证据卡契约与回退策略见 `docs/iteration-3.md`。扩展时优先增加数据结构、纯计算模块和单元测试，再接入主流水线，避免算法与界面耦合。
 
 ## 路线挖掘与评价
 
@@ -121,6 +124,15 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 
 合成实验只验证计算链路和阈值变化，不作为真实准确率。真实视频结论必须使用独立人工标注集。
 
+生成无需真实视频的证据卡回退演示：
+
+```powershell
+.\.venv\Scripts\python.exe -m tools.evidence_demo `
+  --output-dir outputs\evidence_demo
+```
+
+该命令只验证证据卡渲染与导出。处理本地视频时，证据卡读取事件中间帧；摄像头或网络流无法回读时，会明确记录 `generated_canvas`，不会伪造关键帧。
+
 ## 测试与质量检查
 
 ```powershell
@@ -130,14 +142,14 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。迭代 2 本机结果为 21 项测试通过。
+GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。v1.0.0 本机验证结果记录在 `docs/progress-log.md`。
 
 ## 迭代和版本
 
 - `v0.1.0`：本机可运行基线、文档与仓库规范
 - `v0.2.0`：轨迹特征、持续逆行、徘徊检测和异常列表
 - `v0.3.0`：DBSCAN 路线聚类、偏离检测和实验评估
-- `v1.0.0`：证据卡、完整演示数据和稳定 Release
+- `v1.0.0`：证据卡、可复现演示回退、Pages 项目页和稳定 Release
 
 具体任务拆分见 `docs/roadmap.md`，已知问题见 `docs/known-issues.md`，版本变化见 `CHANGELOG.md`。
 

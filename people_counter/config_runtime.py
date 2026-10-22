@@ -77,6 +77,10 @@ class OutputConfig:
     save_route_assignments_csv: bool = True
     save_route_prototypes_csv: bool = True
     save_route_summary_json: bool = True
+    save_evidence_cards: bool = True
+    save_evidence_cards_csv: bool = True
+    save_evidence_manifest_json: bool = True
+    evidence_max_cards: int = 100
     save_summary_json: bool = True
     save_annotated_video: bool = False
     annotated_video_name: str = "annotated_output.mp4"

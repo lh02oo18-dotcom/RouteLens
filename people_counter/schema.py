@@ -97,4 +97,6 @@ class SessionResult:
     route_prototypes: list[dict[str, Any]]
     route_summary: dict[str, Any]
     anomaly_events: list[dict[str, Any]]
+    evidence_cards: list[dict[str, Any]]
+    evidence_summary: dict[str, Any]
     output_paths: dict[str, str]

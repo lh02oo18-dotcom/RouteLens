@@ -4,9 +4,22 @@ All notable RouteLens changes are recorded here. Upstream history is retained se
 
 ## [Unreleased]
 
-### Planned
+No unreleased changes.
 
-- Real-video labeled evaluation and visual evidence cards.
+## [1.0.0] - 2026-10-22
+
+### Added
+
+- Anomaly evidence cards with a representative frame, target track overlay, metrics, thresholds, and portable manifest references.
+- Explicit generated-canvas fallback for non-seekable sources, plus privacy blur propagation.
+- Streamlit evidence gallery and deterministic `tools.evidence_demo` fallback.
+- Static GitHub Pages project overview and deployment workflow.
+
+### Stability and verification
+
+- Evidence cards never claim a captured keyframe when the source cannot be read back.
+- Synthetic evidence remains labeled as pipeline validation, not real-world accuracy.
+- README, architecture, roadmap, demo outline, known issues, and release notes are synchronized for the stable milestone.
 
 ## [0.3.0] - 2026-10-18
 
