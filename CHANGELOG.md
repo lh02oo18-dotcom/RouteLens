@@ -6,6 +6,22 @@ All notable RouteLens changes are recorded here. Upstream history is retained se
 
 No unreleased changes.
 
+## [1.1.0] - 2026-10-28
+
+### Added
+
+- Audited downloader and SHA-256 manifest for three official CAVIAR video/XML pairs.
+- CVML annotation loader plus box, trajectory-continuity, and label-derived event evaluation.
+- Calibration/held-out protocol comparing YOLO11n and YOLO11s with ByteTrack and BoT-SORT.
+- Versioned real-data CSV/JSON results and a reproducible grayscale evaluation figure.
+
+### Findings and boundaries
+
+- YOLO11s + BoT-SORT achieved the best held-out box F1 (0.3958) while processing 61.58 FPS on the verified RTX 4060 environment.
+- Both trackers remained above 60 FPS with YOLO11s; their F1 difference was small and changed by sequence.
+- Two label-derived loitering references were not detected, so event F1 remained 0; the negative result and label-rule mismatch are documented instead of hidden.
+- The three scripted, low-resolution sequences support a small real-data pilot, not cross-camera or production generalisation.
+
 ## [1.0.0] - 2026-10-22
 
 ### Added

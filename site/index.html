@@ -24,13 +24,14 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow">ROUTELENS · VERSION 1.0.0</div>
+  <div class="eyebrow">ROUTELENS · VERSION 1.1.0</div>
   <h1>看见路线，也看见判定依据。</h1>
   <p class="lead">RouteLens 复用 YOLO 与多目标跟踪，把视频中的轨迹转化为路线模式、异常事件和可复查证据卡。它面向普通个人电脑运行，输出 CSV、JSON、视频和图像证据。</p>
   <div class="grid">
     <div class="card"><strong>视觉感知</strong>人员检测、目标跟踪、计数与轨迹记录</div>
     <div class="card"><strong>数据挖掘</strong>DBSCAN 主路线聚类、路线原型与偏离评分</div>
     <div class="card"><strong>可解释输出</strong>关键帧、轨迹、指标、阈值与证据引用</div>
+    <div class="card"><strong>真实数据评价</strong>CAVIAR 下载校验、冻结参数、框级与轨迹指标</div>
   </div>
   <h2>主路径</h2>
   <div class="flow">视频输入 → 人员检测 → 多目标跟踪 → 轨迹特征 → 路线聚类 → 逆行 / 徘徊 / 偏离 → 证据卡与结构化导出</div>
@@ -39,9 +40,11 @@
     <li><code>python -m pytest -q</code>：运行全部单元测试</li>
     <li><code>python -m tools.route_mining_demo</code>：运行合成路线参数扫描</li>
     <li><code>python -m tools.evidence_demo</code>：生成证据卡回退演示</li>
+    <li><code>python -m tools.plot_caviar_results</code>：复现 v1.1.0 评价图</li>
     <li><code>python -m streamlit run app.py</code>：启动本地交互界面</li>
   </ul>
-  <p class="boundary">合成实验只验证计算与导出链路。真实视频的 Precision、Recall 和 F1 必须使用许可明确的视频、独立人工标注及冻结参数后报告。</p>
+  <p class="boundary">v1.1.0 在两个独立 CAVIAR 测试序列上记录 3,312 个人工框。最佳框级匹配 F1 为 0.3958；两个标签映射事件均未检出，事件 F1 为 0。结果只支持小样本比较。</p>
+  <p><a href="https://github.com/lh02oo18-dotcom/RouteLens/blob/main/docs/research/real-data-results.md">查看真实数据实验协议与结果 →</a></p>
   <p><a href="https://github.com/lh02oo18-dotcom/RouteLens">查看 GitHub 仓库与运行说明 →</a></p>
 </main>
 </body>

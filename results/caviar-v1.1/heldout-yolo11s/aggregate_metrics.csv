@@ -1,0 +1,3 @@
+tracker,model,sequence_count,processed_frames,reference_boxes,prediction_boxes,true_positives,false_positives,false_negatives,precision,recall,f1,mean_iou,centroid_rmse_px,macro_track_coverage,identity_switches,identity_switches_per_1000_reference_boxes,processing_fps,reference_loitering_events,predicted_loitering_events,event_true_positives,event_false_positives,event_false_negatives,event_precision,event_recall,event_f1
+botsort,yolo11s.pt,2,2940,3312,1261,905,356,2407,0.7177,0.2732,0.3958,0.8713,3.1907,0.293,5,1.5097,61.58,2,0,0,0,2,0.0,0.0,0.0
+bytetrack,yolo11s.pt,2,2940,3312,1265,888,377,2424,0.702,0.2681,0.388,0.8398,3.0193,0.2869,6,1.8116,66.73,2,0,0,0,2,0.0,0.0,0.0

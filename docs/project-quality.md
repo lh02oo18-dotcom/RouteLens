@@ -5,9 +5,9 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 | Area | Current state | Evidence | Next acceptance point |
 |---|---|---|---|
 | Open-source reuse and design | Stable milestone complete | README, architecture, ADR, trajectory, route-mining and evidence interfaces | Preserve boundaries in future changes |
-| Incremental delivery | Complete through v1.0.0 | Issues, feature branches, tests, roadmap, progress log | Add only evidence-backed milestones |
+| Incremental delivery | Complete through v1.1.0 locally | Issues, feature branches, tests, roadmap, progress log | Publish the evaluated milestone through PR/Release |
 | Repository quality | Complete for current milestone | LICENSE, CONTRIBUTING, templates, CI, CHANGELOG, Releases | Keep dependency alerts reviewed |
-| Communication and problem solving | Stable demo prepared | Decision records, known issues, evidence demo and presentation outline | Add evaluated real-video cases |
+| Communication and problem solving | Stable demo and real-data evidence prepared | Decision records, known issues, CAVIAR results and presentation outline | Add broader scenes only with licensed data |
 
 ## Release readiness
 
@@ -17,7 +17,7 @@ This file maps project goals to verifiable repository evidence. Planned work is 
 | README setup path | Verified locally | README and `docs/baseline-verification.md` |
 | Explicit license | Complete | MIT `LICENSE` and `NOTICE.md` |
 | Issue history | Complete | Issue #1 and linked implementation PRs |
-| At least one Release | Complete | `v0.1.0`, `v0.2.0`, and `v0.3.0`; stable update prepares `v1.0.0` |
+| At least one Release | Complete | `v0.1.0` through `v1.0.0` are published; `v1.1.0` evidence is prepared locally |
 | Traceable history | Complete for current milestone | Feature branches, Conventional Commits, PRs and Actions |
 
 ## GitHub platform checklist

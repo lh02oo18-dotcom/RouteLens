@@ -27,8 +27,14 @@ htmlcov/
 
 outputs/
 runs/
+artifacts/
 data/raw/
 data/videos/
 
 .DS_Store
 Thumbs.db
+
+# High-resolution and QA-only figure exports are regenerated from source CSV.
+*.tiff
+*.collision-audit.pdf
+*.alignment.svg

@@ -1,0 +1,5 @@
+sequence,tracker,model,image_size,confidence,processing_fps,evaluated_frames,reference_boxes,prediction_boxes,true_positives,false_positives,false_negatives,precision,recall,f1,mean_iou,centroid_rmse_px,reference_tracks,prediction_tracks,macro_track_coverage,identity_switches,identity_switches_per_1000_reference_boxes,iou_threshold,matching_method
+Walk1,bytetrack,yolo11s.pt,960,0.05,64.66,594,1559,280,237,43,1322,0.8464,0.152,0.2577,0.8527,2.4198,4,7,0.2844,2,1.2829,0.5,greedy_descending_iou
+Walk1,bytetrack,yolo11s.pt,960,0.1,86.1,594,1559,280,237,43,1322,0.8464,0.152,0.2577,0.8527,2.4198,4,7,0.2844,2,1.2829,0.5,greedy_descending_iou
+Walk1,bytetrack,yolo11s.pt,960,0.15,84.02,594,1559,272,231,41,1328,0.8493,0.1482,0.2523,0.8527,2.4426,4,7,0.2783,2,1.2829,0.5,greedy_descending_iou
+Walk1,bytetrack,yolo11s.pt,960,0.25,84.82,594,1559,254,222,32,1337,0.874,0.1424,0.2449,0.852,2.4756,4,7,0.2702,2,1.2829,0.5,greedy_descending_iou
