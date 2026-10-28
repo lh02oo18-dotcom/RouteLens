@@ -1,0 +1,52 @@
+project:
+  name: RouteLens
+  goal: 在普通电脑上完成可解释的人群检测、跟踪、轨迹模式挖掘与异常事件验证
+  current_stage: M6-real-data-pilot-completed
+  status: completed
+
+data_sufficiency:
+  status: SUFFICIENT
+  reason: 三段 CAVIAR 实拍视频及逐帧人工标注已通过清单与校验值审计，可支持小样本验证
+
+real_data_pilot:
+  source: CAVIAR Test Case Scenarios
+  official_url: https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA1/
+  license: CC BY-SA as stated on the official dataset page
+  sequences:
+    - Walk1
+    - Browse1
+    - Browse_WhileWaiting2
+  total_video_frames: 3570
+  total_annotated_frames: 3549
+  audit_status: approved
+
+evaluation_plan:
+  primary_method: YOLO11s + ByteTrack
+  baselines:
+    - YOLO11s + BoT-SORT
+    - YOLO11n + ByteTrack
+    - YOLO11n + BoT-SORT
+  metrics:
+    - detection_precision_recall_f1_at_iou_0_50
+    - track_coverage
+    - centroid_error
+    - identity_switches
+    - event_precision_recall_f1
+    - processing_fps
+  leakage_control: 事件阈值在正式运行前固定；同一片段不同时用于阈值调参与最终报告
+
+result_summary:
+  calibration_sequence: Walk1
+  heldout_sequences:
+    - Browse1
+    - Browse_WhileWaiting2
+  best_box_f1: 0.3958
+  best_box_configuration: YOLO11s + BoT-SORT
+  best_configuration_fps: 61.58
+  reference_loitering_events: 2
+  detected_loitering_events: 0
+  event_f1: 0.0
+
+next_gate:
+  decision: 扩展场景与修订徘徊标签映射前，不提升事件有效性结论
+  status: completed_with_documented_limitations

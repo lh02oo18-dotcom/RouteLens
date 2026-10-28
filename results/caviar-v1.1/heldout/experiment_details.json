@@ -1,0 +1,312 @@
+[
+  {
+    "sequence": "Browse1",
+    "tracker": "bytetrack",
+    "summary": {
+      "total_frames": 1044,
+      "elapsed_sec": 15.537,
+      "average_fps": 67.19,
+      "total_entered": 0,
+      "total_exited": 0,
+      "current_occupancy": 10,
+      "peak_occupancy": 3,
+      "unique_track_ids_seen": 10,
+      "average_scene_dwell_sec": 3.572,
+      "longest_scene_dwell_sec": 11.4,
+      "crossing_events": 0,
+      "analyzed_trajectories": 10,
+      "anomaly_events": 6,
+      "reverse_direction_events": 0,
+      "loitering_events": 0,
+      "route_clusters": 1,
+      "route_deviation_events": 6,
+      "route_mining_status": "ready",
+      "evidence_cards": 0,
+      "evidence_status": "disabled"
+    },
+    "tracking_metrics": {
+      "evaluated_frames": 1043,
+      "reference_boxes": 2237,
+      "prediction_boxes": 679,
+      "true_positives": 515,
+      "false_positives": 164,
+      "false_negatives": 1722,
+      "precision": 0.7585,
+      "recall": 0.2302,
+      "f1": 0.3532,
+      "mean_iou": 0.843,
+      "centroid_rmse_px": 2.1233,
+      "reference_tracks": 4,
+      "prediction_tracks": 10,
+      "macro_track_coverage": 0.2521,
+      "identity_switches": 7,
+      "identity_switches_per_1000_reference_boxes": 3.1292,
+      "iou_threshold": 0.5,
+      "matching_method": "greedy_descending_iou"
+    },
+    "event_metrics": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "min_temporal_iou": 0.1,
+      "matches": [],
+      "false_positive_indices": [],
+      "false_negative_indices": [
+        0
+      ]
+    },
+    "reference_events": [
+      {
+        "event_type": "loitering",
+        "track_id": 2,
+        "start_frame": 49,
+        "end_frame": 930,
+        "start_timestamp_sec": 1.96,
+        "end_timestamp_sec": 37.2,
+        "reference_source": "CAVIAR role=browser/situation=browsing"
+      }
+    ],
+    "predicted_events_remapped": [],
+    "prediction_to_reference_ids": {
+      "1": 1,
+      "3": 0,
+      "24": 0,
+      "64": 3,
+      "107": 3,
+      "114": 3
+    }
+  },
+  {
+    "sequence": "Browse1",
+    "tracker": "botsort",
+    "summary": {
+      "total_frames": 1044,
+      "elapsed_sec": 15.794,
+      "average_fps": 66.1,
+      "total_entered": 0,
+      "total_exited": 0,
+      "current_occupancy": 10,
+      "peak_occupancy": 3,
+      "unique_track_ids_seen": 10,
+      "average_scene_dwell_sec": 3.572,
+      "longest_scene_dwell_sec": 11.4,
+      "crossing_events": 0,
+      "analyzed_trajectories": 10,
+      "anomaly_events": 6,
+      "reverse_direction_events": 0,
+      "loitering_events": 0,
+      "route_clusters": 1,
+      "route_deviation_events": 6,
+      "route_mining_status": "ready",
+      "evidence_cards": 0,
+      "evidence_status": "disabled"
+    },
+    "tracking_metrics": {
+      "evaluated_frames": 1043,
+      "reference_boxes": 2237,
+      "prediction_boxes": 682,
+      "true_positives": 521,
+      "false_positives": 161,
+      "false_negatives": 1716,
+      "precision": 0.7639,
+      "recall": 0.2329,
+      "f1": 0.357,
+      "mean_iou": 0.8867,
+      "centroid_rmse_px": 2.279,
+      "reference_tracks": 4,
+      "prediction_tracks": 10,
+      "macro_track_coverage": 0.2583,
+      "identity_switches": 7,
+      "identity_switches_per_1000_reference_boxes": 3.1292,
+      "iou_threshold": 0.5,
+      "matching_method": "greedy_descending_iou"
+    },
+    "event_metrics": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "min_temporal_iou": 0.1,
+      "matches": [],
+      "false_positive_indices": [],
+      "false_negative_indices": [
+        0
+      ]
+    },
+    "reference_events": [
+      {
+        "event_type": "loitering",
+        "track_id": 2,
+        "start_frame": 49,
+        "end_frame": 930,
+        "start_timestamp_sec": 1.96,
+        "end_timestamp_sec": 37.2,
+        "reference_source": "CAVIAR role=browser/situation=browsing"
+      }
+    ],
+    "predicted_events_remapped": [],
+    "prediction_to_reference_ids": {
+      "1": 1,
+      "3": 0,
+      "24": 0,
+      "61": 3,
+      "104": 3,
+      "111": 3
+    }
+  },
+  {
+    "sequence": "Browse_WhileWaiting2",
+    "tracker": "bytetrack",
+    "summary": {
+      "total_frames": 1896,
+      "elapsed_sec": 23.534,
+      "average_fps": 80.56,
+      "total_entered": 0,
+      "total_exited": 0,
+      "current_occupancy": 2,
+      "peak_occupancy": 2,
+      "unique_track_ids_seen": 2,
+      "average_scene_dwell_sec": 1.94,
+      "longest_scene_dwell_sec": 3.84,
+      "crossing_events": 0,
+      "analyzed_trajectories": 2,
+      "anomaly_events": 0,
+      "reverse_direction_events": 0,
+      "loitering_events": 0,
+      "route_clusters": 0,
+      "route_deviation_events": 0,
+      "route_mining_status": "insufficient_cluster_support",
+      "evidence_cards": 0,
+      "evidence_status": "disabled"
+    },
+    "tracking_metrics": {
+      "evaluated_frames": 1075,
+      "reference_boxes": 1075,
+      "prediction_boxes": 89,
+      "true_positives": 87,
+      "false_positives": 2,
+      "false_negatives": 988,
+      "precision": 0.9775,
+      "recall": 0.0809,
+      "f1": 0.1495,
+      "mean_iou": 0.8677,
+      "centroid_rmse_px": 1.7988,
+      "reference_tracks": 1,
+      "prediction_tracks": 2,
+      "macro_track_coverage": 0.0809,
+      "identity_switches": 0,
+      "identity_switches_per_1000_reference_boxes": 0.0,
+      "iou_threshold": 0.5,
+      "matching_method": "greedy_descending_iou"
+    },
+    "event_metrics": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "min_temporal_iou": 0.1,
+      "matches": [],
+      "false_positive_indices": [],
+      "false_negative_indices": [
+        0
+      ]
+    },
+    "reference_events": [
+      {
+        "event_type": "loitering",
+        "track_id": 0,
+        "start_frame": 1406,
+        "end_frame": 1895,
+        "start_timestamp_sec": 56.24,
+        "end_timestamp_sec": 75.8,
+        "reference_source": "CAVIAR role=browser/situation=browsing"
+      }
+    ],
+    "predicted_events_remapped": [],
+    "prediction_to_reference_ids": {
+      "41": 0
+    }
+  },
+  {
+    "sequence": "Browse_WhileWaiting2",
+    "tracker": "botsort",
+    "summary": {
+      "total_frames": 1896,
+      "elapsed_sec": 27.688,
+      "average_fps": 68.48,
+      "total_entered": 0,
+      "total_exited": 0,
+      "current_occupancy": 2,
+      "peak_occupancy": 2,
+      "unique_track_ids_seen": 2,
+      "average_scene_dwell_sec": 2.4,
+      "longest_scene_dwell_sec": 4.76,
+      "crossing_events": 0,
+      "analyzed_trajectories": 2,
+      "anomaly_events": 0,
+      "reverse_direction_events": 0,
+      "loitering_events": 0,
+      "route_clusters": 0,
+      "route_deviation_events": 0,
+      "route_mining_status": "insufficient_cluster_support",
+      "evidence_cards": 0,
+      "evidence_status": "disabled"
+    },
+    "tracking_metrics": {
+      "evaluated_frames": 1075,
+      "reference_boxes": 1075,
+      "prediction_boxes": 97,
+      "true_positives": 95,
+      "false_positives": 2,
+      "false_negatives": 980,
+      "precision": 0.9794,
+      "recall": 0.0884,
+      "f1": 0.1621,
+      "mean_iou": 0.8606,
+      "centroid_rmse_px": 2.6764,
+      "reference_tracks": 1,
+      "prediction_tracks": 2,
+      "macro_track_coverage": 0.0884,
+      "identity_switches": 0,
+      "identity_switches_per_1000_reference_boxes": 0.0,
+      "iou_threshold": 0.5,
+      "matching_method": "greedy_descending_iou"
+    },
+    "event_metrics": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "min_temporal_iou": 0.1,
+      "matches": [],
+      "false_positive_indices": [],
+      "false_negative_indices": [
+        0
+      ]
+    },
+    "reference_events": [
+      {
+        "event_type": "loitering",
+        "track_id": 0,
+        "start_frame": 1406,
+        "end_frame": 1895,
+        "start_timestamp_sec": 56.24,
+        "end_timestamp_sec": 75.8,
+        "reference_source": "CAVIAR role=browser/situation=browsing"
+      }
+    ],
+    "predicted_events_remapped": [],
+    "prediction_to_reference_ids": {
+      "41": 0
+    }
+  }
+]

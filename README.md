@@ -2,7 +2,7 @@
 
 RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复用开源 Crowd Counter 的 YOLO 人员检测、目标跟踪、越线计数和导出接口，并在此基础上逐步加入轨迹特征、路线聚类、逆行/徘徊/偏离检测及可解释异常证据卡。
 
-> 当前版本：`1.0.0`。检测、跟踪、计数和轨迹导出复用开源底座；RouteLens 已新增轨迹特征、持续逆行与徘徊规则、DBSCAN 主路线聚类、偏离评分、异常证据卡和可复现评价入口。项目不会把上游已有功能标记为本项目创新。
+> 当前版本：`1.1.0`。检测、跟踪、计数和轨迹导出复用开源底座；RouteLens 已新增轨迹特征、持续逆行与徘徊规则、DBSCAN 主路线聚类、偏离评分、异常证据卡，以及在 CAVIAR 官方实拍视频上的可复现小样本评价。项目不会把上游已有功能标记为本项目创新。
 
 ## 功能状态
 
@@ -16,6 +16,7 @@ RouteLens 是一个本地运行的可解释人群轨迹分析项目。项目复�
 | DBSCAN 主路线聚类与偏离检测 | 已实现 | RouteLens 迭代 2 |
 | 持续逆行与徘徊事件 | 已实现 | RouteLens 迭代 1 |
 | 异常证据卡与结果解释 | 已实现 | RouteLens 迭代 3 |
+| CAVIAR 真实数据下载、校验与对比评价 | 已完成小样本验证 | RouteLens 迭代 4 |
 
 ## 设计亮点与差异化
 
@@ -133,6 +134,24 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 
 该命令只验证证据卡渲染与导出。处理本地视频时，证据卡读取事件中间帧；摄像头或网络流无法回读时，会明确记录 `generated_canvas`，不会伪造关键帧。
 
+## CAVIAR 真实数据实验
+
+原始视频与 XML 标注来自爱丁堡大学 CAVIAR 官方页面。仓库不提交约 45 MB 的原始文件，而是提交官方下载脚本、SHA-256 清单、冻结参数、结果 CSV/JSON 和绘图脚本：
+
+```powershell
+.\.venv\Scripts\python.exe -m tools.download_caviar_pilot
+
+.\.venv\Scripts\python.exe -m tools.run_caviar_experiment `
+  --model yolo11s.pt --confidence 0.05 --image-size 960 `
+  --trackers bytetrack botsort `
+  --sequences Browse1 Browse_WhileWaiting2 `
+  --device 0 --output-dir results\caviar-v1.1\heldout-yolo11s
+
+.\.venv\Scripts\python.exe -m tools.plot_caviar_results
+```
+
+Walk1 仅用于选择 960 输入尺寸与 0.05 置信度阈值，两个 Browse 序列作为独立测试。测试集含 3,312 个人工框；最佳组合 YOLO11s + BoT-SORT 的框级匹配 F1 为 0.3958，视频处理循环吞吐量为 61.58 FPS。两个基于官方浏览标签构造的徘徊参考区间均未被当前几何规则检出，事件 F1 为 0。该负结果表明“浏览”语义与 RouteLens 徘徊规则不等价，不能据此声称真实徘徊检测已经有效。完整协议和结果见 `docs/research/real-data-results.md`。
+
 ## 测试与质量检查
 
 ```powershell
@@ -142,7 +161,7 @@ NVIDIA GPU 用户需要按本机 CUDA 环境安装合适的 PyTorch。CPU 环境
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。v1.0.0 本机验证结果记录在 `docs/progress-log.md`。
+GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pytest。v1.1.0 本机验证结果记录在 `docs/progress-log.md`。
 
 ## 迭代和版本
 
@@ -150,6 +169,7 @@ GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pyt
 - `v0.2.0`：轨迹特征、持续逆行、徘徊检测和异常列表
 - `v0.3.0`：DBSCAN 路线聚类、偏离检测和实验评估
 - `v1.0.0`：证据卡、可复现演示回退、Pages 项目页和稳定 Release
+- `v1.1.0`：CAVIAR 真实数据试验、模型/跟踪器对比、结果图与负结果记录
 
 具体任务拆分见 `docs/roadmap.md`，已知问题见 `docs/known-issues.md`，版本变化见 `CHANGELOG.md`。
 
@@ -164,6 +184,7 @@ GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pyt
 ## 当前限制
 
 - 密集遮挡、低照度、抖动镜头会降低检测和跟踪稳定性。
-- 冒烟测试使用重复静态图像，只验证主路径，不代表真实性能或异常检测精度。
-- 暂未建立真实视频标注集；当前路线挖掘仅完成合成链路验证，不代表已经验证的真实精度。
-- 当前 DBSCAN 距离矩阵为 O(n²)，适合课程演示和小型离线数据，不适合直接处理超大规模轨迹库。
+- 冒烟测试使用重复静态图像，只验证主路径；真实指标来自另行记录的 CAVIAR 小样本实验。
+- CAVIAR 数据分辨率低、年代较早且场景经过编排，小样本结果不能代表开放世界或跨摄像机性能。
+- 当前徘徊规则未检出两个浏览标签参考区间，事件 F1 为 0；需要改善召回、轨迹连续性和语义映射。
+- 当前 DBSCAN 距离矩阵为 O(n²)，适合小型离线数据，不适合直接处理超大规模轨迹库。

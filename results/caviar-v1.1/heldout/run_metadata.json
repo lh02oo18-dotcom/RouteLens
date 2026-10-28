@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-10-22T18:57:58.541028+00:00",
+  "command_parameters": {
+    "manifest": "docs\\research\\caviar-pilot-manifest.csv",
+    "config": "config\\caviar.yaml",
+    "model": "yolo11n.pt",
+    "confidence": 0.05,
+    "image_size": 960,
+    "trackers": [
+      "bytetrack",
+      "botsort"
+    ],
+    "sequences": [
+      "Browse1",
+      "Browse_WhileWaiting2"
+    ],
+    "device": "0",
+    "iou_threshold": 0.5,
+    "min_temporal_iou": 0.1,
+    "min_browser_duration": 10.0,
+    "output_dir": "results\\caviar-v1.1\\heldout"
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "packages": {
+      "numpy": "2.5.2",
+      "opencv-contrib-python": "5.0.0.93",
+      "torch": "2.14.1+cu126",
+      "ultralytics": "8.4.175",
+      "lap": "0.5.13"
+    }
+  },
+  "model_sha256": "0EBBC80D4A7680D14987A577CD21342B65ECFD94632BD9A8DA63AE6417644EE1",
+  "manifest_sha256": "5ECEF40F76BC77D170077BB7706D65D4CF98A336C87122D97BD8D957874F2536"
+}

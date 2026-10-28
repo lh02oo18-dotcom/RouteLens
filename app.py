@@ -12,7 +12,7 @@ from people_counter.counter import VideoCounter
 
 st.set_page_config(page_title="RouteLens", layout="wide")
 st.title("RouteLens · 可解释人群轨迹分析")
-st.caption("v1.0.0：从轨迹中发现通行模式，并用关键帧、轨迹和指标生成异常证据卡。")
+st.caption("v1.1.0：从轨迹中发现通行模式，并用真实数据评价与证据卡解释结果。")
 
 config = load_config("config/default.yaml")
 
