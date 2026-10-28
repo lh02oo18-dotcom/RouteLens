@@ -12,7 +12,7 @@ Use the ADR interface table to show the reused YOLO, ByteTrack, video loop, and 
 
 ### 1:20–2:20 Incremental delivery
 
-Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 baseline, then explain how v0.2, v0.3, and v1.0.0 introduce rule-based anomalies, data mining, and evidence cards. Use the progress log for one real problem-resolution example.
+Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 baseline, then explain how v0.2, v0.3, v1.0.0, and v1.1.0 introduce rule-based anomalies, data mining, evidence cards, and reproducible real-data evaluation. Use the progress log for one real problem-resolution example.
 
 ### 2:20–3:50 Live demo
 
@@ -25,11 +25,11 @@ Show branches, Issues, Pull Requests, and Actions. Start with the runnable v0.1 
 
 ### 3:50–4:30 Evaluation and limits
 
-Describe the data source, manual labels, thresholds, precision/recall, occlusion, ID switches, and scene-transfer limitations. Do not present the static smoke test's 1.58 FPS as real-video performance.
+Describe the CAVIAR source, calibration/test split, frame-level box matching, track coverage, event mapping, occlusion, ID switches, and scene-transfer limitations. State that the best box-matching F1 is 0.3958 and the mapped-event F1 is 0; do not replace this negative result with the static smoke test.
 
 ### 4:30–5:00 Engineering quality
 
-Show the quick start, license and notice, tests, CI, Release, and known issues, then finish with the public repository URL.
+Show the quick start, license and notice, tests, CI, Release, Pages, Discussions and known issues, then finish with the public repository URL.
 
 ## Demo fallback
 
@@ -38,3 +38,4 @@ Show the quick start, license and notice, tests, CI, Release, and known issues, 
 - Keep exported annotated video, CSV, JSON, and evidence-card screenshots.
 - If the UI fails, run the same pipeline through the CLI.
 - If no GPU is available, switch to CPU and a shorter video.
+

@@ -175,7 +175,7 @@ GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pyt
 
 ## 贡献与协作
 
-请先用 Issue 描述问题、验收条件和复现素材，再从功能分支提交 Pull Request。提交信息采用 `feat:`、`fix:`、`docs:`、`test:`、`chore:` 等前缀。完整流程见 `CONTRIBUTING.md`。
+请先用 [Issue](https://github.com/lh02oo18-dotcom/RouteLens/issues) 描述问题、验收条件和复现素材；需要讨论设计取舍时使用 [Discussions](https://github.com/lh02oo18-dotcom/RouteLens/discussions)，再从功能分支提交 Pull Request。提交信息采用 `feat:`、`fix:`、`docs:`、`test:`、`chore:` 等前缀。完整流程见 `CONTRIBUTING.md`，静态项目页见 [GitHub Pages](https://lh02oo18-dotcom.github.io/RouteLens/)。
 
 ## 开源来源与许可
 
@@ -188,3 +188,4 @@ GitHub Actions 会在 push 和 Pull Request 时执行依赖检查、Ruff 与 Pyt
 - CAVIAR 数据分辨率低、年代较早且场景经过编排，小样本结果不能代表开放世界或跨摄像机性能。
 - 当前徘徊规则未检出两个浏览标签参考区间，事件 F1 为 0；需要改善召回、轨迹连续性和语义映射。
 - 当前 DBSCAN 距离矩阵为 O(n²)，适合小型离线数据，不适合直接处理超大规模轨迹库。
+
